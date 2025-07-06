@@ -1,0 +1,30 @@
+
+<svg width="160" height="160" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Gradient globe -->
+  <circle cx="100" cy="100" r="80" fill="url(#grad1)" />
+
+  <!-- Spade or marker shape -->
+  <path d="M100 40 Q 140 60, 100 120 Q 60 60, 100 40 Z"
+        fill="white"
+        opacity="0.9" />
+
+  <!-- Orbit ring -->
+  <circle cx="100" cy="100" r="60"
+          fill="none"
+          stroke="white"
+          stroke-width="2"
+          stroke-opacity="0.7"
+          stroke-dasharray="5,5" />
+
+  <!-- Hotspot -->
+  <circle cx="100" cy="100" r="25"
+          fill="#10b981"
+          opacity="0.8" />
+</svg>
