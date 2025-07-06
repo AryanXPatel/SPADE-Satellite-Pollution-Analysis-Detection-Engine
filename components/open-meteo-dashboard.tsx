@@ -1,22 +1,40 @@
-"use client"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { useOpenMeteoData } from "@/hooks/use-open-meteo-data"
-import { RefreshCw, Thermometer, Droplets, Wind, Eye, Sun } from "lucide-react"
+"use client";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useOpenMeteoData } from "@/hooks/use-open-meteo-data";
+import { RefreshCw, Thermometer, Droplets, Wind, Eye, Sun } from "lucide-react";
 
 interface OpenMeteoDashboardProps {
-  latitude: number
-  longitude: number
-  cityName?: string
+  latitude: number;
+  longitude: number;
+  cityName?: string;
 }
 
-export function OpenMeteoDashboard({ latitude, longitude, cityName = "Selected Location" }: OpenMeteoDashboardProps) {
-  const { currentAirQuality, currentWeather, forecastData, isLoading, error, lastUpdate, refresh } = useOpenMeteoData({
+export function OpenMeteoDashboard({
+  latitude,
+  longitude,
+  cityName = "Selected Location",
+}: OpenMeteoDashboardProps) {
+  const {
+    currentAirQuality,
+    currentWeather,
+    forecastData,
+    isLoading,
+    error,
+    lastUpdate,
+    refresh,
+  } = useOpenMeteoData({
     latitude,
     longitude,
     forecastDays: 7,
-  })
+  });
 
   if (isLoading) {
     return (
@@ -30,7 +48,7 @@ export function OpenMeteoDashboard({ latitude, longitude, cityName = "Selected L
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -46,7 +64,7 @@ export function OpenMeteoDashboard({ latitude, longitude, cityName = "Selected L
           </div>
         </CardContent>
       </Card>
-    )
+    );
   }
 
   return (
@@ -58,7 +76,11 @@ export function OpenMeteoDashboard({ latitude, longitude, cityName = "Selected L
           <p className="text-gray-600">
             {latitude.toFixed(4)}, {longitude.toFixed(4)}
           </p>
-          {lastUpdate && <p className="text-sm text-gray-500">Last updated: {lastUpdate.toLocaleTimeString()}</p>}
+          {lastUpdate && (
+            <p className="text-sm text-gray-500">
+              Last updated: {lastUpdate.toLocaleTimeString()}
+            </p>
+          )}
         </div>
         <Button onClick={refresh} variant="outline" size="sm">
           <RefreshCw className="h-4 w-4 mr-2" />
@@ -71,7 +93,10 @@ export function OpenMeteoDashboard({ latitude, longitude, cityName = "Selected L
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <div className="w-4 h-4 rounded-full" style={{ backgroundColor: currentAirQuality.aqi.color }} />
+              <div
+                className="w-4 h-4 rounded-full"
+                style={{ backgroundColor: currentAirQuality.aqi.color }}
+              />
               Current Air Quality
             </CardTitle>
             <CardDescription>Real-time pollution measurements</CardDescription>
@@ -79,24 +104,39 @@ export function OpenMeteoDashboard({ latitude, longitude, cityName = "Selected L
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">
-                <div className="text-2xl font-bold" style={{ color: currentAirQuality.aqi.color }}>
-                  {currentAirQuality.aqi.value}
+                <div
+                  className="text-2xl font-bold"
+                  style={{ color: currentAirQuality.aqi.color }}
+                >
+                  {currentAirQuality.aqi.aqi}
                 </div>
                 <div className="text-sm text-gray-600">AQI</div>
-                <Badge className="mt-1" style={{ backgroundColor: currentAirQuality.aqi.color, color: "white" }}>
+                <Badge
+                  className="mt-1"
+                  style={{
+                    backgroundColor: currentAirQuality.aqi.color,
+                    color: "white",
+                  }}
+                >
                   {currentAirQuality.aqi.category}
                 </Badge>
               </div>
               <div className="text-center">
-                <div className="text-xl font-bold">{currentAirQuality.pm25.toFixed(1)}</div>
+                <div className="text-xl font-bold">
+                  {currentAirQuality.pm25.toFixed(1)}
+                </div>
                 <div className="text-sm text-gray-600">PM2.5 µg/m³</div>
               </div>
               <div className="text-center">
-                <div className="text-xl font-bold">{currentAirQuality.pm10.toFixed(1)}</div>
+                <div className="text-xl font-bold">
+                  {currentAirQuality.pm10.toFixed(1)}
+                </div>
                 <div className="text-sm text-gray-600">PM10 µg/m³</div>
               </div>
               <div className="text-center">
-                <div className="text-xl font-bold">{currentAirQuality.o3.toFixed(1)}</div>
+                <div className="text-xl font-bold">
+                  {currentAirQuality.o3.toFixed(1)}
+                </div>
                 <div className="text-sm text-gray-600">O₃ µg/m³</div>
               </div>
             </div>
@@ -112,42 +152,54 @@ export function OpenMeteoDashboard({ latitude, longitude, cityName = "Selected L
               <Thermometer className="h-5 w-5" />
               Current Weather
             </CardTitle>
-            <CardDescription>Meteorological conditions affecting air quality</CardDescription>
+            <CardDescription>
+              Meteorological conditions affecting air quality
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               <div className="flex items-center gap-2">
                 <Thermometer className="h-4 w-4 text-orange-500" />
                 <div>
-                  <div className="font-semibold">{currentWeather.temperature.toFixed(1)}°C</div>
+                  <div className="font-semibold">
+                    {currentWeather.temperature.toFixed(1)}°C
+                  </div>
                   <div className="text-sm text-gray-600">Temperature</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Droplets className="h-4 w-4 text-blue-500" />
                 <div>
-                  <div className="font-semibold">{currentWeather.humidity}%</div>
+                  <div className="font-semibold">
+                    {currentWeather.humidity}%
+                  </div>
                   <div className="text-sm text-gray-600">Humidity</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Wind className="h-4 w-4 text-gray-500" />
                 <div>
-                  <div className="font-semibold">{currentWeather.windSpeed.toFixed(1)} km/h</div>
+                  <div className="font-semibold">
+                    {currentWeather.windSpeed.toFixed(1)} km/h
+                  </div>
                   <div className="text-sm text-gray-600">Wind Speed</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Eye className="h-4 w-4 text-purple-500" />
                 <div>
-                  <div className="font-semibold">{currentWeather.pressure.toFixed(0)} hPa</div>
+                  <div className="font-semibold">
+                    {currentWeather.pressure.toFixed(0)} hPa
+                  </div>
                   <div className="text-sm text-gray-600">Pressure</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Sun className="h-4 w-4 text-yellow-500" />
                 <div>
-                  <div className="font-semibold">{currentWeather.cloudCover}%</div>
+                  <div className="font-semibold">
+                    {currentWeather.cloudCover}%
+                  </div>
                   <div className="text-sm text-gray-600">Cloud Cover</div>
                 </div>
               </div>
@@ -161,7 +213,9 @@ export function OpenMeteoDashboard({ latitude, longitude, cityName = "Selected L
         <Card>
           <CardHeader>
             <CardTitle>7-Day Air Quality Forecast</CardTitle>
-            <CardDescription>Predicted pollution levels and health recommendations</CardDescription>
+            <CardDescription>
+              Predicted pollution levels and health recommendations
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
@@ -169,7 +223,10 @@ export function OpenMeteoDashboard({ latitude, longitude, cityName = "Selected L
                 .slice(0, 7 * 4)
                 .filter((_: any, index: number) => index % 6 === 0)
                 .map((point: any, index: number) => (
-                  <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-3 border rounded-lg"
+                  >
                     <div>
                       <div className="font-medium">
                         {new Date(point.timestamp).toLocaleDateString("en-US", {
@@ -179,22 +236,34 @@ export function OpenMeteoDashboard({ latitude, longitude, cityName = "Selected L
                         })}
                       </div>
                       <div className="text-sm text-gray-600">
-                        {point.weatherFactors.temperature.toFixed(0)}°C, {point.weatherFactors.humidity}% humidity
+                        {point.weatherFactors.temperature.toFixed(0)}°C,{" "}
+                        {point.weatherFactors.humidity}% humidity
                       </div>
                     </div>
                     <div className="text-center">
-                      <div className="font-bold" style={{ color: point.aqi.color }}>
+                      <div
+                        className="font-bold"
+                        style={{ color: point.aqi.color }}
+                      >
                         PM2.5: {point.pm25.toFixed(0)}
                       </div>
-                      <Badge style={{ backgroundColor: point.aqi.color, color: "white" }} className="text-xs">
+                      <Badge
+                        style={{
+                          backgroundColor: point.aqi.color,
+                          color: "white",
+                        }}
+                        className="text-xs"
+                      >
                         {point.aqi.category}
                       </Badge>
                     </div>
                     <div className="text-right">
-                      <div className="text-sm font-medium">{point.confidence}% confidence</div>
+                      <div className="text-sm font-medium">
+                        {point.confidence}% confidence
+                      </div>
                       <div className="text-xs text-gray-600">
                         {point.healthRecommendations[0]
-                          ?.replace(/[🚨⚠️👥✅🌱💧🏥😷🏠🚶‍♀️🏃‍♂️☀️]/gu, "")
+                          ?.replace(/[🚨⚠️👥✅🌱💧🏥😷🏠🚶‍♀️🏃‍♂️☀️]/g, "")
                           .trim()
                           .substring(0, 30)}
                         ...
@@ -207,5 +276,5 @@ export function OpenMeteoDashboard({ latitude, longitude, cityName = "Selected L
         </Card>
       )}
     </div>
-  )
+  );
 }

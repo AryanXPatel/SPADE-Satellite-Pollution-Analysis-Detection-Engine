@@ -7,16 +7,15 @@ import { Badge } from "@/components/ui/badge";
 import { useAuth, hasPermission } from "@/lib/auth";
 import {
   Home,
-  BarChart3,
   Database,
   TrendingUp,
-  Settings,
+  BarChart3,
   Bell,
-  Menu,
-  X,
-  Package,
+  Settings,
   LogOut,
-  Download,
+  Package,
+  X,
+  Menu,
 } from "lucide-react";
 import { BulkExportDialog } from "./bulk-export-dialog";
 

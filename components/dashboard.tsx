@@ -19,7 +19,8 @@ import { MapControls } from "./map-controls";
 import { useVerifiedLiveData } from "@/hooks/use-verified-live-data";
 
 export function Dashboard() {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  // Remove setSelectedDate since it's not used
+  const [selectedDate] = useState(new Date());
   const [mapLayers, setMapLayers] = useState({
     pm25: true,
     pm10: false,
