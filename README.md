@@ -10,7 +10,7 @@
 
 ## 🌍 Overview
 
-SPADE (Satellite Pollution Analysis & Detection Engine) is an advanced air quality monitoring system that combines satellite data, ground-based measurements, and AI-powered predictions to provide real-time pollution analysis across India. Built for the ISRO SPADE Hackathon 2024, this application demonstrates cutting-edge environmental monitoring capabilities.
+SPADE (Satellite Pollution Analysis & Detection Engine) is an advanced air quality monitoring system that combines satellite data, ground-based measurements, and AI-powered predictions to provide real-time pollution analysis across India. Built for the ISRO SPADE Hackathon 2025, this application demonstrates cutting-edge environmental monitoring capabilities.
 
 ## ✨ Features
 
